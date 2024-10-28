@@ -1,5 +1,6 @@
 import {
   Links,
+  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -8,6 +9,8 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import styles from "./tailwind.css?url";
+import Footer from "~/components/Footer";
+import Navbar from "~/components/Navbar";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -23,7 +26,7 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout() {
   return (
     <html lang="en">
       <head>
@@ -33,9 +36,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="container mx-auto font-roboto">
-        {children}
+        <Navbar />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
         <ScrollRestoration />
         <Scripts />
+        <LiveReload />
       </body>
     </html>
   );
